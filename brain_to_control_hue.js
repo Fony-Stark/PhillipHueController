@@ -13,7 +13,7 @@ async function get_all_lights(){
     }
 }
 
-let standard = "https://192.168.1.116/api/9VVcN-PWsDxs-bmWgNPOE0N4SfzO-OTdFypVWEO9";
+let standard = "https://192.168.1.116/api/";
 function turn_off_light(light, index){
     let xhr = new XMLHttpRequest();
     let encoded_url = encodeURI(standard + "/lights/" + index + "/state");
