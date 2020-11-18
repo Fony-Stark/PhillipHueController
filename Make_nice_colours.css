@@ -10,6 +10,10 @@
     margin-top: 25px;
 }
 
+#buttonContainer {
+    margin-left: 10px;
+}
+
 .containers {
     height: 500px;
     width: 250px;

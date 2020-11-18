@@ -28,14 +28,20 @@ function turn_off_light(light, index){
     xhr.send(["{\"on\":" + bool + "}"]);
 }
 
-get_all_lights().then((value) => {
-    let lights = value;
-    let i = 0;
-    while(lights[i] != null){
-        create_light_mode(lights[i], i+1);
-        i++;
-    }
-});
+function reloadLights(){
+    document.getElementById("containter").innerHTML = "";
+    get_all_lights().then((value) => {
+        let lights = value;
+        let i = 0;
+        while(lights[i] != null){
+            create_light_mode(lights[i], i+1);
+            i++;
+        }
+    });
+}
+reloadLights();
+
+document.getElementById("ReLoad").addEventListener("click", reloadLights);
 
 function create_light_mode(light, index){
     let container = document.createElement("div");
@@ -125,7 +131,7 @@ function create_light_mode(light, index){
     container.appendChild(paragraph_sat);
     container.appendChild(sat_slighter);
     container.appendChild(switch_obj);
-    document.body.appendChild(container);
+    document.getElementById("containter").appendChild(container);
 }
 
 function changeName(index, new_name){
