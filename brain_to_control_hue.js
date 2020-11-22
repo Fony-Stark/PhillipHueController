@@ -63,8 +63,8 @@ function open_specific(light, index, xpos, ypos){
     advanced_settings_div.style.width = "500px";
     advanced_settings_div.style.height = "275px";
     advanced_settings_div.style.position = "absolute";
-    advanced_settings_div.style.top = ((ypos + 275 > window.innerHeight) ? ypos - 275 : ypos)+"px";
-    advanced_settings_div.style.left = ((xpos + 500 > window.innerWidth) ? xpos - 500 : xpos)+"px";
+    advanced_settings_div.style.top = ((ypos + 275 > window.innerHeight) ? window.innerHeight - 275 : ypos)+"px";
+    advanced_settings_div.style.left = ((xpos + 500 > window.innerWidth) ? window.innerWidth - 500 : xpos)+"px";
     advanced_settings_div.style.border = "solid black 2px";
     advanced_settings_div.style.backgroundColor = "#BDA69D"; 
     advanced_settings_div.id = "advanced_settings";
