@@ -26,6 +26,7 @@ function turn_off_light(light, index){
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(["{\"on\":" + bool + "}"]);
+    setTimeout(reloadLights, 5*1000*60);
 }
 
 function reloadLights(){
@@ -81,6 +82,7 @@ function open_specific(light, index, xpos, ypos){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(["{\"bri\":" + this.value + "}"]);
         light.state.bri = this.value;
+        setTimeout(reloadLights, 5*1000*60);
     }
 
     let paragraph_bright = document.createElement("p");
@@ -101,6 +103,7 @@ function open_specific(light, index, xpos, ypos){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(["{\"hue\":" + this.value + "}"]);
         light.state.hue = this.value;
+        setTimeout(reloadLights, 5*1000*60);
     }
 
     let paragraph_hue = document.createElement("p");
@@ -121,6 +124,7 @@ function open_specific(light, index, xpos, ypos){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(["{\"sat\":" + this.value + "}"]);
         light.state.sat = this.value;
+        setTimeout(reloadLights, 5*1000*60);
     }
 
     let paragraph_sat = document.createElement("p");
@@ -128,6 +132,19 @@ function open_specific(light, index, xpos, ypos){
     paragraph_sat.style.marginBottom = 0;
     paragraph_sat.style.fontSize = "2em";
 
+    let sleep_2_min = document.createElement("div");
+    sleep_2_min.innerHTML = "Sluk efter 2 min";
+    sleep_2_min.style.fontSize = "2em";
+    sleep_2_min.style.border = "black solid 2px";
+    sleep_2_min.style.width = "max-content";
+    sleep_2_min.style.margin = "2px";
+    sleep_2_min.style.cursor = "pointer";
+    sleep_2_min.style.backgroundColor = "#9DB4BD";
+    sleep_2_min.addEventListener("click", function() {
+        sleep_after_n_minutes(light, index, 2);
+    });
+
+    advanced_settings_div.appendChild(sleep_2_min);
     advanced_settings_div.appendChild(paragraph_bright);
     advanced_settings_div.appendChild(brightness_slider);
     advanced_settings_div.appendChild(paragraph_hue);
@@ -137,6 +154,10 @@ function open_specific(light, index, xpos, ypos){
 
     document.getElementsByTagName("BODY")[0].appendChild(backgroung_to_click_away);
     document.getElementsByTagName("BODY")[0].appendChild(advanced_settings_div);
+}
+
+function sleep_after_n_minutes(light, index, n){
+    setTimeout(turn_off_light, n*1000*60, light, index)
 }
 
 function create_light_mode(light, index){
@@ -154,6 +175,7 @@ function create_light_mode(light, index){
         let xpos = event.clientX;
         let ypos = event.clientY;
         open_specific(light, index, xpos, ypos);
+        setTimeout(reloadLights, 5*1000*60);
     });
 
     let switch_obj = document.createElement("div");
