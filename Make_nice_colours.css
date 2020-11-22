@@ -1,31 +1,46 @@
 .On_off_switch {
-    border-radius: 100px;
-    padding: 5px;
-    width: max-content;
+    border: black solid 2px;
+    padding: 3px;
+    width: 4em;
     font-size: 2em;
     cursor: pointer;
     user-select: none;
-    margin-left: 30%;
-    float: left;
-    margin-top: 25px;
+    margin: auto;
+    margin-top: 5px;
 }
 
 #buttonContainer {
-    margin-left: 10px;
+    margin: 0;
+    padding-left: 10px;
+    background-color: #41AAc4;
+    width: 99.3vw;
+}
+
+.Advanced {
+    background-color: #9DBDB6;
+    border: solid black 2px;
+    padding: 2px;
+    font-size: 2em;
+    margin: auto;
+    width: max-content;
+    cursor: pointer;
+    user-select: none;
+
 }
 
 .containers {
-    height: 500px;
-    width: 250px;
+    background-color: #BDB69C;
+    height: 13em;
+    width: 13em;
     float:left;
     margin: 10px;
-    border: solid black 2px;
+    border: solid rgb(0, 0, 0) 2px;
 }
 
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
-    width: 100%; /* Full-width */
+    width: 98%; /* Full-width */
     height: 25px; /* Specified height */
     background: #d3d3d3; /* Grey background */
     outline: none; /* Remove outline */
@@ -38,4 +53,26 @@ h1 {
     max-width: max-content;
     margin-left:auto;
     margin-right:auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#comments {
+    position: absolute;
+    bottom: 0px;
+    border: solid black 1%;
+    width: 98;
+}
+
+#idaersej {
+    font-size: 30px;
+    color: rgb(31, 22, 22);
+    font-family: "Lucida Console", Courier, monospace;
+}
+
+body {
+    background-color: #dddddd;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
 }
