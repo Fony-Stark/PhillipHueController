@@ -9,6 +9,10 @@
     margin-top: 5px;
 }
 
+p {
+    margin: 2px;
+}
+
 #buttonContainer {
     margin: 0;
     padding-left: 10px;
