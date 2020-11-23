@@ -65,6 +65,7 @@ function get_month_short(num){
     return return_value;
 }
 
+update_clock();
 setInterval(update_clock, 1000);
 
 document.getElementsByTagName("BODY")[0].addEventListener("click", longer_then_10_min);
