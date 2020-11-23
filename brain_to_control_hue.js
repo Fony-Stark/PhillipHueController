@@ -14,6 +14,31 @@ async function get_all_lights(){
     }
 }
 
+document.getElementsByTagName("BODY")[0].addEventListener("click", longer_then_10_min);
+let last_input = new Date();
+function longer_then_10_min(){
+    if(Math.floor((new Date() - last_input)/60000) > 10){
+        reloadLights();
+    }
+    last_input = new Date();
+}
+
+let current_timer = null;
+let current_timer_stopper = null;
+function made_progress(){
+    longer_then_10_min();
+    if(current_timer != null){
+        window.clearTimeout(current_timer);
+        window.clearTimeout(current_timer_stopper);
+    }
+
+    current_timer = setTimeout(reloadLights, 5*1000*60);
+    
+    current_timer_stopper = setTimeout(() => {
+        current_timer = null;
+    }, 5*1000*60);
+}
+
 function turn_off_light(light, index){
     let xhr = new XMLHttpRequest();
     let encoded_url = encodeURI(standard + "/lights/" + index + "/state");
@@ -26,7 +51,7 @@ function turn_off_light(light, index){
 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(["{\"on\":" + bool + "}"]);
-    setTimeout(reloadLights, 5*1000*60);
+    made_progress();
 }
 
 function reloadLights(){
@@ -82,7 +107,7 @@ function open_specific(light, index, xpos, ypos){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(["{\"bri\":" + this.value + "}"]);
         light.state.bri = this.value;
-        setTimeout(reloadLights, 5*1000*60);
+        made_progress();
     }
 
     let paragraph_bright = document.createElement("p");
@@ -103,7 +128,7 @@ function open_specific(light, index, xpos, ypos){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(["{\"hue\":" + this.value + "}"]);
         light.state.hue = this.value;
-        setTimeout(reloadLights, 5*1000*60);
+        made_progress();
     }
 
     let paragraph_hue = document.createElement("p");
@@ -124,7 +149,7 @@ function open_specific(light, index, xpos, ypos){
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.send(["{\"sat\":" + this.value + "}"]);
         light.state.sat = this.value;
-        setTimeout(reloadLights, 5*1000*60);
+        made_progress();
     }
 
     let paragraph_sat = document.createElement("p");
@@ -175,7 +200,7 @@ function create_light_mode(light, index){
         let xpos = event.clientX;
         let ypos = event.clientY;
         open_specific(light, index, xpos, ypos);
-        setTimeout(reloadLights, 5*1000*60);
+        made_progress();
     });
 
     let switch_obj = document.createElement("div");
