@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/common.css" />
+    <link rel="stylesheet" href="/SharedLinks/SharedMakeup.css" />
+    <title>Shared Links</title>
+</head>
+<body>
+    <div id="buttonContainer">
+        <button type="button" id="ReLoad">Reload Page</button> 
+        <a href="/HueController/frontpage.html" id="SharedLinks">Hue Controller</a>
+        <div id="clock"></div>
+    </div>
+    <div id="body_container">
+        <div id="linkSelect">
+            <div id="linksfield">
+
+            </div>
+            <div id="new_opskrift_div">
+                <div id="test_url" class="opskrifter">Test opskrift URL</div>
+                <div id="new_opskrift" class="opskrifter">Tilføj Ny Opskrift</div>
+            </div>
+        </div>
+        <iframe id="linkViewer" title="opskrifter" src=""></iframe>
+        <!-- 
+            https://www.dk-kogebogen.dk/ 
+            https://www.opskrifter.dk/
+            https://www.webopskrifter.dk/115/
+            https://www.maduniverset.dk/
+            https://www.jamieoliver.com/recipes/
+            https://www.allrecipes.com/
+            https://www.food.com/
+        -->
+    </div>
+    <script src="/clock.js" ></script>
+    <script src="/SharedLinks/brain_links_getter.js"></script>
+</body>
+</html>

@@ -13,23 +13,8 @@
     margin-top:6px;
 }
 
-#clock {
-    margin-top: 2px;
-    font-size: 2em;
-    float:right;
-    margin-right: 10px;
-}
-
 p {
     margin: 2px;
-}
-
-#buttonContainer {
-    margin: 0;
-    height: 2.2em;
-    padding-left: 10px;
-    background-color: #41AAc4;
-    width: 99.3vw;
 }
 
 .Advanced {

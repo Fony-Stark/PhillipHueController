@@ -1,6 +1,5 @@
-let standard = "https://192.168.1.116/api/9VVcN-PWsDxs-bmWgNPOE0N4SfzO-OTdFypVWEO9";
 async function get_all_lights(){
-    let response = await fetch(standard + "/lights");
+    let response = await fetch("/lights");
     if(response.ok){
         let light_object = await response.json();
         //console.log(light_object);
@@ -13,60 +12,6 @@ async function get_all_lights(){
         return all_lights;
     }
 }
-
-function update_clock(){
-    let d = new Date();
-    let hours = (d.getHours() < 10) ? "0"+d.getHours() : d.getHours();
-    let minutes = (d.getMinutes() < 10) ? "0"+d.getMinutes() : d.getMinutes();
-    let seconds = (d.getSeconds() < 10) ? "0"+d.getSeconds() : d.getSeconds();
-    let days = (d.getDate() < 10) ? "0"+d.getDate() : d.getDate();
-    document.getElementById("clock").innerHTML = hours + ":" + minutes + ":" + seconds + " - " +  get_month_short(d.getMonth()) + ": " + days;
-}
-
-function get_month_short(num){
-    let return_value = "jan";
-    switch(num){
-        case 2:
-            return_value = "Feb"
-            break;
-        case 3:
-            return_value = "Mar"
-            break;
-        case 4:
-            return_value = "Apr"
-            break;
-        case 5:
-            return_value = "May"
-            break;
-        case 6:
-            return_value = "Jun"
-            break;
-        case 7:
-            return_value = "Jul"
-            break;
-        case 8:
-            return_value = "Aug"
-            break;
-        case 9:
-            return_value = "Sep"
-            break;
-        case 10:
-            return_value = "Oct"
-            break;
-        case 11:
-            return_value = "Nov"
-            break;
-        case 12:
-            return_value = "Dec"
-            break;
-        default:
-            return_value = "NaM"
-    }
-    return return_value;
-}
-
-update_clock();
-setInterval(update_clock, 1000);
 
 document.getElementsByTagName("BODY")[0].addEventListener("click", longer_then_10_min);
 let last_input = new Date();
@@ -95,16 +40,17 @@ function made_progress(){
 
 function turn_off_light(light, index){
     let xhr = new XMLHttpRequest();
-    let encoded_url = encodeURI(standard + "/lights/" + index + "/state");
     //console.log("Hey", encoded_url);
-    xhr.open('PUT', encoded_url, true);
+    xhr.open('POST', "/", true);
 
     let bool = !light.state.on;
     light.state.on = bool;
     //console.log("This bool:", bool);
 
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(["{\"on\":" + bool + "}"]);
+    xhr.setRequestHeader("Content-type", "application/json");
+    let f = {"intend": "lights", "body": "{\"on\":" + bool + "}", "url": ("/lights/" + index + "/state")};
+    let message = JSON.stringify(f);
+    xhr.send(message);
     made_progress();
 }
 
@@ -156,10 +102,10 @@ function open_specific(light, index, xpos, ypos){
     brightness_slider.classList.add("slider");
     brightness_slider.onchange = function(){
         let xhr = new XMLHttpRequest();
-        let encoded_url = encodeURI(standard + "/lights/" + index + "/state");
-        xhr.open('PUT', encoded_url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(["{\"bri\":" + this.value + "}"]);
+        xhr.open('POST', "/", true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        let f = {"intend": "lights", "url": "/lights/" + index + "/state/", "body": "{\"bri\":" + this.value + "}"};
+        xhr.send(JSON.stringify(f));
         light.state.bri = this.value;
         made_progress();
     }
@@ -177,10 +123,10 @@ function open_specific(light, index, xpos, ypos){
     hue_slighter.classList.add("slider");
     hue_slighter.onchange = function(){
         let xhr = new XMLHttpRequest();
-        let encoded_url = encodeURI(standard + "/lights/" + index + "/state");
-        xhr.open('PUT', encoded_url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(["{\"hue\":" + this.value + "}"]);
+        xhr.open('POST', "/", true);
+        xhr.setRequestHeader("Content-type", "application/json");
+        let f = {"url": "/lights/" + index + "/state", "intend": "lights", "body": "{\"hue\":" + this.value + "}"};
+        xhr.send(JSON.stringify(f));
         light.state.hue = this.value;
         made_progress();
     }
@@ -198,10 +144,10 @@ function open_specific(light, index, xpos, ypos){
     sat_slighter.classList.add("slider");
     sat_slighter.onchange = function(){
         let xhr = new XMLHttpRequest();
-        let encoded_url = encodeURI(standard + "/lights/" + index + "/state");
-        xhr.open('PUT', encoded_url, true);
+        xhr.open('POST', "/", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(["{\"sat\":" + this.value + "}"]);
+        let f = {"url": "/lights/" + index + "/state", "intend": "lights", "body": "{\"sat\":" + this.value + "}"};
+        xhr.send(JSON.stringify(f));
         light.state.sat = this.value;
         made_progress();
     }
@@ -288,8 +234,8 @@ function create_light_mode(light, index){
 
 function changeName(index, new_name){
     let xhr = new XMLHttpRequest();
-    let encoded_url = encodeURI(standard + "/lights/" + index);
-    xhr.open('PUT', encoded_url, true);
+    xhr.open('POST', "/", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(["{\"name\":" + "\""+new_name+"\"" + "}"]);
+    let f = {"intend": "lights", "url": "/lights/" + index, "body": "{\"name\":" + "\""+new_name+"\"" + "}"};
+    xhr.send(JSON.stringify(f));
 }
