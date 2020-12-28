@@ -2,7 +2,9 @@ const fs = require("fs");
 const https = require("https");
 const http = require("http");
 const path = require("path");
+const HCLib = require("./HueController");
 const { exception } = require("console");
+
 
 http.createServer((req, res) => {
     server_functions(req, res, 12000);
@@ -112,42 +114,54 @@ async function GET_method_response(req, res){
     }
 }
 
+async function timer_action(light_index, name){
+    switch(name){
+        case "turn_off":
+            huecontrol.turn_light_off(light_index);
+            break;
+        default:
+            break;
+    }
+}
+
 let URL = "192.168.1.116";
 let KEY = "9VVcN-PWsDxs-bmWgNPOE0N4SfzO-OTdFypVWEO9";
+let huecontrol = new HCLib.HueController(URL, KEY);
 async function POST_method_response(req, res){
     let current_path = __dirname;
     let source_url = current_path.substring(0, current_path.length - "server".length);
-
-    let standard = URL;
-    let standard_path = "/api/" + KEY;
 
     let raw_message = await post_value(req, res); 
     let message = JSON.parse(raw_message);
     /* console.log(message); */
     if(message.intend == "lights"){
-        let options = {
-            host: standard,
-            path: standard_path + message.url,
-            method: "PUT",
-            headers: {
-                "Content-type": "application/x-www-form-urlencoded"
-            }
+        switch(message.action){
+            case "turn_light_on":
+                huecontrol.turn_light_on(message.index);
+                break;
+            case "turn_light_off":
+                huecontrol.turn_light_off(message.index);
+                break;
+            case "change_bri_value":
+                huecontrol.change_bri_value(message.index, message.value);
+                break;
+            case "change_hue_value":
+                huecontrol.change_hue_value(message.index, message.value);
+                break;
+            case "change_sat_value":
+                huecontrol.change_sat_value(message.index, message.value);
+                break;
+            case "change_name":
+                huecontrol.change_name(message.index, message.value);
+                break;
+            case "turn_off_after_2":
+                console.log("Turning off light with index", message.index, "in:", message.n_minutes);
+                setTimeout(timer_action, message.n_minutes*1000*60, message.index, "turn_off");
+                break;
+            default:
+                console.log("I recived a light command, which I didn't recognize.");
+                break;
         }
-
-        let request = http.request(options, function(response) {
-            let responseString = "resp - ";
-
-            response.on("data", function(data){
-                responseString += data;
-            })
-            response.on("end", function() {
-                console.log(responseString);
-            });
-        });
-
-        console.log("this is it: ", message.body);
-        request.write(message.body);
-        request.end();
     } else if (message.intend == "timer"){
 
     } else if (message.intend == "alarm"){

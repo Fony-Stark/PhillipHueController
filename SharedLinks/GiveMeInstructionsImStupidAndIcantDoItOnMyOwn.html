@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/HueController/Make_nice_colours.css" />
     <link rel="stylesheet" href="/common.css" />
-    <title>Hue Controller</title>
+    <link rel="stylesheet" href="./Opskrifter_Rasp.css" />
+    <title>Real recipes</title>
 </head>
 <body>
     <div id="buttonContainer">
-        <button type="button" id="ReLoad" >Reload Page</button> 
+        <a href="/HueController/frontpage.html" id="Hue_controller" class="dictionary_pages_links_stuff">Hue Controller</a>
         <a href="/SharedLinks/SharedLinks.html" id="SharedLinks" class="dictionary_pages_links_stuff">Shared Links</a>
-        <a href="/SharedLinks/GiveMeInstructionsImStupidAndIcantDoItOnMyOwn.html" id="p" class="dictionary_pages_links_stuff">ShoW Me tHEm rEcIpes</a>
+        <div id="DisguisedBox">
+            <p id="DisguisedLink">ShoW Me tHEm RecIpes</p>
+        </div>
         <a href="/Timer/Timers_frontpage.html" class="dictionary_pages_links_stuff">Timers</a>
         <div id="clock"></div>
     </div>
-    <div id="containter">
-    </div>
-    <div id="comments">
-        <div id="idaersej"><h3>hej karl det er ida hilsen ida</h3></div>
-    </div>
-    <script src="/HueController/brain_to_control_hue.js" ></script>
+
+    <iframe id="linkViewer" title="opskrifter" src=""></iframe>
+
     <script src="/clock.js" ></script>
+    <script src="/SharedLinks/Rasp_linker.js"></script>
 </body>
 </html>

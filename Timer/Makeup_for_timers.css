@@ -1,0 +1,134 @@
+#create_new_timer_div {
+    width: 100%;
+    height: 22.8vh;
+    background-color: #BDB69C;
+    display:flex;
+    flex-direction: row;
+    border: solid black 2px;
+}
+
+#numpad {
+    display: flex;
+    flex-direction: column;
+}
+
+.a_row_numpad {
+    display: flex;
+    flex-direction: row;
+}
+
+#timer {
+    font-size: 2em;
+    margin: auto;
+    width: max-content;
+    user-select: none;
+}
+
+.numpad {
+    width: 5em;
+    font-size: 2em;
+    border: 2px black solid;
+    background-color: #9DBDB6;
+}
+
+.num_numpad {
+    width: max-content;
+    margin: auto;
+    user-select: none;
+}
+
+#nDel {
+    background-color: rgb(157, 150, 210);
+}
+
+#nReset {
+    background-color: rgb(157, 150, 210);
+}
+
+#set_timer {
+    margin-left: 1vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#timer_div {
+    border:solid black 2px;
+    background-color: rgb(189, 166, 157);
+}
+
+#lamp_selection_div {
+    width: 25vw;
+    border: solid black 2px;
+    margin-top: 1vh;
+    margin-left: 2vw;
+    margin-bottom: 1vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#choose_lamp {
+    width: 100%;
+    height: 1.5em;
+    font-size: 2em;
+    background-color: rgb(189, 166, 157);
+    border-bottom: black solid 2px;
+    user-select: none;
+    overflow:hidden;
+}
+
+#choosen_lamps{
+    background-color: #9DBDB6;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+
+}
+
+#settings_for_current_lamp {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    border: solid black 2px;
+    margin: 1vh 1vw;
+}
+
+#use_settings_set_timer {
+    width: 100%;
+    height: max-content;
+    background-color: rgb(157, 150, 210);
+    border-top: black solid 2px;
+}
+
+#p_set_alarm {
+    width: max-content;
+    margin: auto;
+    font-size: 2em;
+}
+
+#settings {
+    height: 100%;
+    width: 100%;
+    background-color: #9DBDB6;
+}
+
+#stpdname {
+    font-size: 2em;
+    width: max-content;
+    margin: auto;
+}
+
+#choosing_field {
+    width: 100%;
+    border-top: dashed black 2px;
+    border-bottom: solid black 2px;
+}
+
+#f_in_chat {
+    font-size: 1.5em;
+    width: max-content;
+    margin: auto;
+}
+
+#choose_affected {
+    background-color: rgb(189, 166, 157);
+}

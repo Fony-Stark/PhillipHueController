@@ -48,7 +48,8 @@ function turn_off_light(light, index){
     //console.log("This bool:", bool);
 
     xhr.setRequestHeader("Content-type", "application/json");
-    let f = {"intend": "lights", "body": "{\"on\":" + bool + "}", "url": ("/lights/" + index + "/state")};
+    let on_off = (bool == true) ? "turn_light_on" : "turn_light_off";
+    let f = {"intend": "lights", "action": on_off, "index": index};
     let message = JSON.stringify(f);
     xhr.send(message);
     made_progress();
@@ -88,6 +89,8 @@ function open_specific(light, index, xpos, ypos){
     advanced_settings_div.style.width = "500px";
     advanced_settings_div.style.height = "275px";
     advanced_settings_div.style.position = "absolute";
+    advanced_settings_div.style.overflowX = "hidden";
+    advanced_settings_div.style.overflowY = "hidden";
     advanced_settings_div.style.top = ((ypos + 275 > window.innerHeight) ? window.innerHeight - 275 : ypos)+"px";
     advanced_settings_div.style.left = ((xpos + 500 > window.innerWidth) ? window.innerWidth - 500 : xpos)+"px";
     advanced_settings_div.style.border = "solid black 2px";
@@ -104,7 +107,7 @@ function open_specific(light, index, xpos, ypos){
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "/", true);
         xhr.setRequestHeader("Content-type", "application/json");
-        let f = {"intend": "lights", "url": "/lights/" + index + "/state/", "body": "{\"bri\":" + this.value + "}"};
+        let f = {"intend": "lights", "action": "change_bri_value", "value": this.value, "index": index};
         xhr.send(JSON.stringify(f));
         light.state.bri = this.value;
         made_progress();
@@ -125,7 +128,7 @@ function open_specific(light, index, xpos, ypos){
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "/", true);
         xhr.setRequestHeader("Content-type", "application/json");
-        let f = {"url": "/lights/" + index + "/state", "intend": "lights", "body": "{\"hue\":" + this.value + "}"};
+        let f = {"intend": "lights", "action": "change_hue_value", "value": this.value, "index": index};
         xhr.send(JSON.stringify(f));
         light.state.hue = this.value;
         made_progress();
@@ -146,7 +149,7 @@ function open_specific(light, index, xpos, ypos){
         let xhr = new XMLHttpRequest();
         xhr.open('POST', "/", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        let f = {"url": "/lights/" + index + "/state", "intend": "lights", "body": "{\"sat\":" + this.value + "}"};
+        let f = {"intend": "lights", "action": "change_sat_value", "value": this.value, "index": index};
         xhr.send(JSON.stringify(f));
         light.state.sat = this.value;
         made_progress();
@@ -166,7 +169,14 @@ function open_specific(light, index, xpos, ypos){
     sleep_2_min.style.cursor = "pointer";
     sleep_2_min.style.backgroundColor = "#9DB4BD";
     sleep_2_min.addEventListener("click", function() {
-        sleep_after_n_minutes(light, index, 2);
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', "/", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        let f = {"intend": "lights", "action": "turn_off_after_2", "index": index, "n_minutes": 2};
+        xhr.send(JSON.stringify(f));
+        light.state.sat = this.value;
+        
+        sleep_after_n_minutes(2);
     });
 
     advanced_settings_div.appendChild(sleep_2_min);
@@ -181,8 +191,8 @@ function open_specific(light, index, xpos, ypos){
     document.getElementsByTagName("BODY")[0].appendChild(advanced_settings_div);
 }
 
-function sleep_after_n_minutes(light, index, n){
-    setTimeout(turn_off_light, n*1000*60, light, index)
+function sleep_after_n_minutes(n){
+    setTimeout(get_all_lights, n*1000*60);
 }
 
 function create_light_mode(light, index){
@@ -236,6 +246,6 @@ function changeName(index, new_name){
     let xhr = new XMLHttpRequest();
     xhr.open('POST', "/", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    let f = {"intend": "lights", "url": "/lights/" + index, "body": "{\"name\":" + "\""+new_name+"\"" + "}"};
+    let f = {"intend": "lights", "action": "change_name", "value": new_name, "index": index};
     xhr.send(JSON.stringify(f));
 }

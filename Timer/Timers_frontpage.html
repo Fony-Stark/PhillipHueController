@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/common.css" />
+    <link rel="stylesheet" href="./Makeup_for_timers.css" />
+    <title>Timers</title>
+</head>
+<body>
+    <div id="buttonContainer">
+        <a href="/HueController/frontpage.html" id="Hue_controller" class="dictionary_pages_links_stuff">Hue Controller</a>
+        <a href="/SharedLinks/SharedLinks.html" id="SharedLinks" class="dictionary_pages_links_stuff">Shared Links</a>
+        <a href="/SharedLinks/GiveMeInstructionsImStupidAndIcantDoItOnMyOwn.html" id="p" class="dictionary_pages_links_stuff">ShoW Me tHEm rEcIpes</a>
+        <a href="/Timer/Timers_frontpage.html" class="dictionary_pages_links_stuff">Timers</a>
+        <div id="clock"></div>
+    </div>
+
+    <div id="create_new_timer_div">
+        <div id="set_timer">
+            <div id="timer_div">
+                <div id="timer">00:00:00</div>
+            </div>
+            <div id="numpad">
+                <div class="a_row_numpad">
+                    <div id="n7" class="numpad"><p class="num_numpad">7</p></div>
+                    <div id="n8" class="numpad"><p class="num_numpad">8</p></div>
+                    <div id="n9" class="numpad"><p class="num_numpad">9</p></div>
+                </div>
+                <div class="a_row_numpad">
+                    <div id="n4" class="numpad"><p class="num_numpad">4</p></div>
+                    <div id="n5" class="numpad"><p class="num_numpad">5</p></div>
+                    <div id="n6" class="numpad"><p class="num_numpad">6</p></div>
+                </div>
+                <div class="a_row_numpad">
+                    <div id="n1" class="numpad"><p class="num_numpad">1</p></div>
+                    <div id="n2" class="numpad"><p class="num_numpad">2</p></div>
+                    <div id="n3" class="numpad"><p class="num_numpad">3</p></div>
+                </div>
+                <div class="a_row_numpad">
+                    <div id="nReset" class="numpad"><p class="num_numpad">RESET</p></div>
+                    <div id="n0" class="numpad"><p class="num_numpad">0</p></div>
+                    <div id="nDel" class="numpad"><p class="num_numpad">DEL</p></div>
+                </div>
+            </div>
+        </div>
+        <div id="lamp_selection_div">
+            <div id="choose_lamp">Choose lamps append</div>
+            <div id="choosen_lamps"></div>
+        </div>
+        <div id="settings_for_current_lamp">
+            <div id="choose_affected">
+                <p id="f_in_chat">Select affected lamps</p>
+                <div id="choosing_field"><p id="stpdname">All</p></div>
+            </div>
+            <div id="settings">
+
+            </div>
+            <div id="use_settings_set_timer"><p id="p_set_alarm">Set Alarm</p></div>
+        </div>
+    </div>
+
+    <script src="/clock.js" ></script>
+    <script src="./Brain_to_control_timers.js" ></script>
+</body>
+</html>

@@ -8,39 +8,42 @@ function update_clock(){
 }
 
 function get_month_short(num){
-    let return_value = "jan";
+    let return_value = "";
     switch(num){
-        case 2:
+        case 0:
+            return_value = "jan";
+            break;
+        case 1:
             return_value = "Feb"
             break;
-        case 3:
+        case 2:
             return_value = "Mar"
             break;
-        case 4:
+        case 3:
             return_value = "Apr"
             break;
-        case 5:
+        case 4:
             return_value = "May"
             break;
-        case 6:
+        case 5:
             return_value = "Jun"
             break;
-        case 7:
+        case 6:
             return_value = "Jul"
             break;
-        case 8:
+        case 7:
             return_value = "Aug"
             break;
-        case 9:
+        case 8:
             return_value = "Sep"
             break;
-        case 10:
+        case 9:
             return_value = "Oct"
             break;
-        case 11:
+        case 10:
             return_value = "Nov"
             break;
-        case 12:
+        case 11:
             return_value = "Dec"
             break;
         default:
