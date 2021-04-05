@@ -29,6 +29,21 @@ class HueController {
         this.send_message(action, "/lights/" + index + "/state");
     }
 
+    sleep(ms) {
+        return new Promise((resolve) => {
+          setTimeout(resolve, ms);
+        });
+    }
+
+    async blink(index, value1, value2, time){
+        while(true){
+            this.change_hue_value(index, value1);
+            await this.sleep(time);
+            this.change_hue_value(index, value2);
+            await this.sleep(time);
+        }
+    }
+
     change_sat_value(index, value){
         let action = {"sat": parseInt(value)};
         this.send_message(action, "/lights/" + index + "/state");
