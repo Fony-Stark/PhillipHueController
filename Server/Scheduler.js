@@ -5,14 +5,12 @@ class Scheduler {
 	}
 
 	checkAlarms(){
-		let now = Data.getTime();
+		let date = new Date();
+		let now = date.getTime();
 		for(let i = 0; i < this.quequeLength; i++){
 			if(this.alarms[i].experationDate - now <= 0){
-				if(this.alarms[i].executions < this.alarms[i].lifespan){
+				if(this.alarms[i].expired == false){
 					this.alarms[i].execute();
-					this.alarms[i].executions++;
-				} else {
-					this.alarms[i].expired = true;
 				}
 			}
 		}

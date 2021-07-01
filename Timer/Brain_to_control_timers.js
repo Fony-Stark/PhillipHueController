@@ -1,3 +1,25 @@
+let xhr = new XMLHttpRequest();
+    xhr.open('POST', "/", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    let action = get_action();
+    let lamps = get_lamps();
+    let time = get_time_mili();
+    let f = {"intend": "alarm", "action": action, "lamps": lamps, "time_in_mili": time};
+    xhr.send(JSON.stringify(f));
+
+function get_lamps(){
+    
+}
+
+function get_time_mili(){
+    let timers = get_value_timer();
+    return (timers[0]*60*60 + timers[1]*60 + timers[2]*1)*1000
+}
+
+function get_action(){
+
+}
+
 async function get_all_lights(){
     let response = await fetch("/lights");
     if(response.ok){
@@ -12,7 +34,6 @@ async function get_all_lights(){
         return all_lights;
     }
 }
-
 
 document.getElementById("choose_lamp").addEventListener("click", function(event) {
     let xpos = event.clientX;
